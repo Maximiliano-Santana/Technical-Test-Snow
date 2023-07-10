@@ -11,31 +11,24 @@ function SnowMeter() {
     for (var i = 0; i < maxHeightWalls.length; i++) {
         let leftWall = maxHeightWalls[i];
         let rightWall = maxHeightWalls[i + 1];
-
         if (heights[leftWall] <= heights[rightWall]) {
-            console.log(`Se comparan ${leftWall} con ${rightWall}`);
             snowHeight = heights[leftWall];
         } else if (heights[leftWall] >= heights[rightWall]) {
             snowHeight = heights[rightWall];
-            console.log(`Se comparan ${leftWall} con ${rightWall}`)
         } else {
             snowHeight = 0;
         }
-
         if (snowHeight != 0) {
             if (!(leftWall == rightWall)) {
                 snow += (rightWall - (leftWall + 1)) * snowHeight;
-                console.log(`Altura maxima: ${snowHeight}`);
-
             }
-
         }
         for (var j = leftWall + 1; j < rightWall; j++) {
-            console.log(j);
             wall += heights[j]
         }
     }
     snow = snow - wall;
+    console.log(`Nieve almacenada: ${snow}`);
 }
 
 function calcularMaximos() {
@@ -43,21 +36,15 @@ function calcularMaximos() {
         if (wallHeight >= max && wallHeight > heights[i + 1]) {
             max = wallHeight;
             maxHeightWalls.push(i);
-            console.log(`${max}`);
         }
     });
-
     max = 0;
-    console.log("derecha a izquierda");
     for (var i = heights.length; i > 0; i--) {
         if (heights[i] >= max && heights[i] > heights[i - 1]) {
             max = heights[i];
             maxHeightsAux.unshift(i);
-            console.log(`${max}`);
         }
     }
     maxHeightWalls = maxHeightWalls.concat(maxHeightsAux);
-    console.log(maxHeightWalls)
 }
-
 SnowMeter();
